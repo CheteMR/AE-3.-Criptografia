@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\nacho\OneDrive\Escritorio\EDIX 2 DAM\Programación de Servicios y Procesos\AE-3. Criptografía\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+3448802629.index
+1848205052.index

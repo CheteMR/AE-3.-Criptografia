@@ -1,0 +1,91 @@
+import java.util.Scanner;
+
+public class Main {
+
+	 public static void main(String[] args) {
+	        // Crear usuarios
+	        Usuario[] usuarios = {
+	                new Usuario("usuario1", "contrasena1"),
+	                new Usuario("usuario2", "contrasena2"),
+	                new Usuario("usuario3", "contrasena3")
+	        };
+
+	        // Autenticar al usuario
+	        boolean autenticado = false;
+	        Scanner scanner = new Scanner(System.in);
+
+	        for (int intento = 0; intento < 3; intento++) {
+	            System.out.print("Introduzca su nombre de usuario: ");
+	            String nombreUsuario = scanner.nextLine();
+	            System.out.print("Introduzca su contraseña: ");
+	            String contrasena = scanner.nextLine();
+
+	            // Buscar el usuario en la lista
+	            Usuario usuario = null;
+	            for (Usuario u : usuarios) {
+	                if (u.getNombreUsuario().equals(nombreUsuario)) {
+	                    usuario = u;
+	                    break;
+	                }
+	            }
+
+	            // Verificar la autenticación
+	            if (usuario != null && usuario.getContrasenaHasheada().equals(usuario.hashContrasena(contrasena))) {
+	                autenticado = true;
+	                System.out.println("Bienvenido, " + usuario.getNombreUsuario() + "!");
+	                break;
+	            } else {
+	                System.out.println("Nombre de usuario o contraseña incorrectos. Inténtelo de nuevo.");
+	            }
+	        }
+
+	        if (!autenticado) {
+	            System.out.println("Demasiados intentos fallidos. Saliendo del programa.");
+	            return;
+	        }
+
+	        // Si el usuario está autenticado, continuar con el programa
+	        EncriptadorSimetrico encriptador = new EncriptadorSimetrico();
+
+	        while (true) {
+	            System.out.println("\nMenú:");
+	            System.out.println("1. Encriptar frase");
+	            System.out.println("2. Desencriptar frase");
+	            System.out.println("3. Salir del programa");
+
+	            System.out.print("Seleccione una opción: ");
+	            String opcion = scanner.nextLine();
+
+	            switch (opcion) {
+	                case "1":
+	                    System.out.print("Introduzca la frase a encriptar: ");
+	                    String frase = scanner.nextLine();
+	                    encriptador.encriptarFrase(frase);
+	                    break;
+	                case "2":
+	                	
+	                	System.out.print("Introduzca la frase encriptada (en Base64): " );
+	                	String fraseEncriptadaBase64 = scanner.nextLine();
+	                	System.out.print("Introduzca la frase encriptada (en Base64): " +fraseEncriptadaBase64);
+	                    encriptador.desencriptarFrase(fraseEncriptadaBase64);
+	                   
+	                    break;
+	                case "3":
+	                    System.out.println("Saliendo del programa. ¡Hasta luego!");
+	                    scanner.close();
+	                    System.exit(0);
+	                    break;
+	                default:
+	                    System.out.println("Opción no válida. Inténtelo de nuevo.");
+	            }
+	        }
+	    }
+	}
+	
+		
+
+
+
+	
+
+
